@@ -104,7 +104,10 @@ public class asistencias {
 
             try {
                 // Parsear solo DESPUÉS de que el usuario elija
-                List<Integer> ignoreCols = parseIgnoreCols(text); // puede ser vacío => no ignorar nada
+                List<Integer> ignoreCols = parseIgnoreCols(text);
+                if (!ignoreCols.isEmpty()) {
+                    Collections.sort(ignoreCols);
+                }
                 return new MatrixConfig(nHeaders, ignoreCols, true);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(parent,
