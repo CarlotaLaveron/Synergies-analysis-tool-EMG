@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ejml-core-0.43.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../ejml-core-0.43.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ejml-ddense-0.43.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ejml-simple-0.43.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

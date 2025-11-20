@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="codehaus.woodstox.stax2.api" type="repository">
+    <properties maven-id="org.codehaus.woodstox:stax2-api:4.2.2" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/woodstox/stax2-api/4.2.2/stax2-api-4.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
