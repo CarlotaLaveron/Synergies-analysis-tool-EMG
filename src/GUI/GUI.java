@@ -108,7 +108,6 @@ public class GUI extends JFrame {
         title.setForeground(Color.WHITE);
         top.add(title, BorderLayout.WEST);
 
-        // ---- contenedor derecha con Back + Exit ----
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 12, 0));
         right.setOpaque(false);
 
@@ -744,10 +743,10 @@ public class GUI extends JFrame {
 
         if (chartsBoard == null) {
             chartsBoard = new graphs();
-            fullContent.add(chartsBoard.getView(), BorderLayout.CENTER); // <-- incrustado aquí
-            charts = graphs.nmfCharts(W, H, muscles.getNames());
-            chartsBoard.mountGridCharts(charts);
+            fullContent.add(chartsBoard.getView(), BorderLayout.CENTER);
         }
+        charts = graphs.nmfCharts(W, H, muscles.getNames());
+        chartsBoard.mountGridCharts(charts);
 
         // keep your existing Back button behavior in the TOP BAR
         if (backBtn != null) backBtn.setVisible(true);
@@ -761,6 +760,11 @@ public class GUI extends JFrame {
     }
 
     private void restoreSplitView() {
+        if (backBtn != null) backBtn.setVisible(false);
+        if (saveBtn != null) saveBtn.setVisible(false);
+        if (saveButton != null) saveButton.setEnabled(true);
+
+
         if (split == null) {
             split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                     buildLeftPanel(), buildRightPanel());
@@ -769,19 +773,19 @@ public class GUI extends JFrame {
             split.setEnabled(false);
             split.setContinuousLayout(true);
         }
-        if (backBtn != null) backBtn.setVisible(false);
-
 
         Container content = getContentPane();
         if (fullPanel != null) content.remove(fullPanel);  // elimina panel fullscreen
-        fullPanel = null;                                  // importante
+        fullPanel = null;
+
+        chartsBoard = null;
+        charts = null;
 
         content.add(split, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
 
         SwingUtilities.invokeLater(() -> split.setDividerLocation(0.40));
-
     }
 
     private final Font UI_FONT = new Font("Century Gothic", Font.PLAIN, 18);
