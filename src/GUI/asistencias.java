@@ -1,17 +1,28 @@
 package GUI;
-import javafx.scene.chart.Chart;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.chart.*;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import operators.MatrixConfig;
 import operators.SelectedMuscles;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -232,7 +243,7 @@ public class asistencias {
                 zos.closeEntry();
             }
 
-            // 2.2) Escribir matrices en un TXT dentro del ZIP
+            //escribir file
             if (W != null || H != null) {
                 String txt = buildMatricesTxt(W, H, muscles);
                 zos.putNextEntry(new ZipEntry("matrices.txt"));
@@ -245,7 +256,6 @@ public class asistencias {
             e.printStackTrace();
         }
     }
-
     private static String buildMatricesTxt(double[][] W, double[][] H, List<String> muscles) {
         StringBuilder sb = new StringBuilder();
         java.text.DecimalFormat df = new java.text.DecimalFormat(
@@ -292,7 +302,6 @@ public class asistencias {
 
         return sb.toString();
     }
-
 
     /** Snapshot del Chart a PNG (Scene offscreen + CSS + layout). */
     private static byte[] snapshotChartToPngBytes(Chart chart, int widthPx, int heightPx,
@@ -347,6 +356,5 @@ public class asistencias {
         latch.await();
         return out[0];
     }
-
 
 }
